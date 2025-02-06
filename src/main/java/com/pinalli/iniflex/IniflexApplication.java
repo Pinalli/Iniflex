@@ -32,10 +32,11 @@ public class IniflexApplication implements CommandLineRunner {
 		functionarioService.aplicarAumento();
 		functionarioService.listarFuncionariosAgrupadosPorFuncao();
 		functionarioService.imprimirAniversariantes();
-		functionarioService.imprimirFuncionarioMaisVelho();
+		functionarioService.imprimirFuncionarioComMaiorIdade() ;
 		functionarioService.imprimirListaPorOrdemAlfabetica();
 		functionarioService.imprimirTotalSalarios();
 		functionarioService.imprimirQtdSalariosMinimos();
+
 		excelService.exportarFuncionarios(functionarioService.listarTodos(), "funcionarios.xlsx");
 	}
 }
