@@ -37,6 +37,6 @@ public class IniflexApplication implements CommandLineRunner {
 		functionarioService.imprimirTotalSalarios();
 		functionarioService.imprimirQtdSalariosMinimos();
 
-		excelService.exportarFuncionarios(functionarioService.listarTodos(), "funcionarios.xlsx");
+		excelService.exportarFuncionarios(functionarioService.listarTodosFuncionarios(), "funcionarios.xlsx");
 	}
 }

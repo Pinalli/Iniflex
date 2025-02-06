@@ -29,8 +29,9 @@ public class PrincipalFuncionarioService {
     private static final DecimalFormat DECIMAL_FORMATTER = new DecimalFormat("#,##0.00");
 
     /**
-     * 3.1 – Inserir todos os funcionários, na mesma ordem e informações da tabela acima.
+     * Adiciona todos os funcionários à lista, mantendo a mesma ordem e informações da tabela original.
      */
+
     public void inicializarFuncionarios() {
         funcionarios.add(new Funcionario("Maria", LocalDate.of(2000, 10, 18),
                 new BigDecimal("2009.44"), "Operador"));
@@ -55,8 +56,9 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * 3.2 – Remover o funcionário “João” da lista.
+     * Remove o funcionário chamado "João" da lista, caso esteja presente.
      */
+
     public void removerFuncionario(String nome) {
         // Remover o funcionário da lista
         funcionarios.removeIf(f -> f.getNome().equals(nome));
@@ -73,9 +75,11 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * 3.3 – Imprimir todos os funcionários com todas suas informações, sendo que:
-     * • informação de data deve ser exibido no formato dd/mm/aaaa;
-     * • informação de valor numérico deve ser exibida no formatado com separador de milhar como ponto e decimal como vírgula.
+     * Imprime a lista de todos os funcionários com suas informações formatadas.
+     *
+     * Regras de formatação:
+     * - A data de nascimento é exibida no formato "dd/MM/yyyy".
+     * - O salário é formatado com separador de milhar como ponto e decimal como vírgula.
      */
     public void listarFuncionarios() {
         System.out.println("\nLista dos Funcionários:");
@@ -87,8 +91,10 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * 3.4 – Os funcionários receberam 10% de aumento de salário, atualizar a lista de funcionários com novo valor.
+     * Aplica um aumento de 10% no salário de todos os funcionários,
+     * atualizando a lista com os novos valores.
      */
+
     public void aplicarAumento() {
         System.out.println("\nLista de funcionarios com aumento de 10%: ");
         funcionarios.forEach(f ->
@@ -102,14 +108,22 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * 3.5 – Agrupar os funcionários por função em um MAP, sendo a chave a “função” e o valor a “lista de funcionários”.
+     * Agrupa os funcionários por função em um Map, onde a chave é a função
+     * e o valor é a lista de funcionários que exercem essa função.
      */
+
     public void listarFuncionariosAgrupadosPorFuncao() {
         Map<String, List<Funcionario>> funcionariosPorFuncao = funcionarios.stream()
                 .collect(Collectors.groupingBy(Funcionario::getFuncao));
 
         /**
-         * 3.6 – Imprimir os funcionários, agrupados por função.
+         * Imprime os nomes dos funcionários agrupados por função.
+         * Formato de saída:
+         * Função 1:
+         * - Nome funcionário 1
+         * - Nome funcionário 2
+         * Função 2:
+         * - Nome funcionário 3
          */
         System.out.println("\n=== Lista de Funcionários por Função ===");
 
@@ -125,7 +139,11 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * 3.8 – Imprimir os funcionários que fazem aniversário no mês 10 e 12.
+     * Imprime o nome dos funcionários que fazem aniversário em Outubro (10) ou Dezembro (12).
+     * Formato da saída:
+     * Aniversariantes de Outubro e Dezembro:
+     * - Nome funcionário 1 (dd/mm/aa)
+     * - Nome funcionário 2 (dd/mm/aa)
      */
     public List<Funcionario> buscarAniversariantes() {
         return funcionarios.stream()
@@ -138,15 +156,20 @@ public class PrincipalFuncionarioService {
         if (aniversariantes.isEmpty()) {
             System.out.println("\nNenhum funcionário faz aniversário em outubro ou dezembro.");
         } else {
-            System.out.println("\n=== Lista de Funcionários que fazem aniversário em outubro e dezembro ===");
+            System.out.println("\n=== Aniversariantes de Outubro e Dezembro: ===");
 
             aniversariantes.forEach(f -> System.out.println(f.getNome() + " - " + f.getDataNascimento()));
         }
     }
 
     /**
-     * 3.9 – Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.
+     * Identifica e imprime o funcionário com a maior idade da lista.
+     * Formato da saída:
+     * Funcionário com a maior idade
+     * Nome: [nome]
+     * Idade: [idade] anos
      */
+
     public void imprimirFuncionarioComMaiorIdade() {
         LocalDate hoje = LocalDate.now();
         Funcionario maiorIdade = funcionarios.stream()
@@ -163,40 +186,39 @@ public class PrincipalFuncionarioService {
         }
 
     }
-    /**
-     * 3.10 – Imprimir a lista de funcionários por ordem alfabética.
-     */
-    public List<Funcionario> listarPorOrdemAlfabetica() {
-        return funcionarios.stream()
-                .sorted(Comparator.comparing(Funcionario::getNome))
-                .collect(Collectors.toList());
-    }
 
     /**
-     * 3.11 – Imprimir o total dos salários dos funcionários.
+     * Exibe a lista de nomes dos funcionários em ordem alfabética.
+     * Formato da saída:
+     * 1. [nome]
+     * 2. [nome]
+     * ...
      */
     public void imprimirListaPorOrdemAlfabetica() {
-        List<Funcionario> listaOrdenada = listarPorOrdemAlfabetica();
-        System.out.println("\nLista de funcionários em ordem alfabética:");
-        listaOrdenada.forEach(f -> System.out.println(f.getNome()));
-    }
-
-    public BigDecimal calcularTotalSalarios() {
-        return funcionarios.stream()
-                .map(Funcionario::getSalario)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public void imprimirTotalSalarios() {
-        BigDecimal totalSalarios = calcularTotalSalarios();
-        System.out.println("\nTotal dos salários dos funcionários:\nR$ " + DECIMAL_FORMATTER.format(totalSalarios));
+        System.out.println("\n === Lista de funcionários em ordem alfabética ===");
+        funcionarios.stream()
+                .sorted(Comparator.comparing(Funcionario::getNome))
+                .forEach(f -> System.out.println(f.getNome()));
     }
 
     /**
-     * 3.12 – Imprimir quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00.
+     * Calcula e exibe o valor total da folha salarial.
+     * Formato da saída:
+     * Total de salários: R$ XX.XXX,XX
      */
+    public void imprimirTotalSalarios() {
+        BigDecimal totalSalarios = funcionarios.stream()
+                .map(Funcionario::getSalario)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("\n === Total dos salários: === \nR$ " + DECIMAL_FORMATTER.format(totalSalarios));
+    }
+    /**
+     * Imprime a quantidade de salários mínimos que cada funcionário ganha,
+     * considerando que o salário mínimo é R$ 1.212,00.
+     */
+
     public void imprimirQtdSalariosMinimos() {
-        System.out.println("\nQuantidade de salários mínimos por funcionário:");
+        System.out.println("\n === Quantidade de salários mínimos por funcionário ===");
 
         funcionarios.forEach(f -> {
             BigDecimal qtdSalarios = f.getSalario()
@@ -207,10 +229,10 @@ public class PrincipalFuncionarioService {
     }
 
     /**
-     * Fornece a lista completa de funcionários para o método de exportação.
+     * Retorna a lista completa de funcionários para exportação.
      */
 
-    public List<Funcionario> listarTodos() {
+    public List<Funcionario> listarTodosFuncionarios() {
         return new ArrayList<>(funcionarios);
     }
 }

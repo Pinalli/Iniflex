@@ -35,11 +35,11 @@ public class ExcelService {
 
             // Escrever no arquivo
             workbook.write(fileOut);
-            System.out.println("Exportação concluída: " + filePath);
+            System.out.println("\nExportação do Excel concluída: " + filePath);
 
         } catch (IOException e) {
-            System.err.println("Erro ao exportar para Excel: " + e.getMessage());
-            throw new RuntimeException("Erro ao exportar para Excel", e);
+            System.err.println("\nErro ao exportar para Excel: " + e.getMessage());
+            throw new RuntimeException("\nErro ao exportar para Excel", e);
         }
     }
 
