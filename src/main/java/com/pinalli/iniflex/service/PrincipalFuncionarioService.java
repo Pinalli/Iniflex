@@ -12,7 +12,13 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * Serviço principal para gerenciamento de funcionários.
+ * Contém métodos para listagem, remoção, exportação para Excel e outras operações.
+ *
+ * @author Alberto Rocha Pinalli
+ * @since 06/02/2025
+ */
 @Service
 public class PrincipalFuncionarioService {
 
